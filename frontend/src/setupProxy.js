@@ -6,7 +6,7 @@ module.exports = function(app) {
     app.use(
       '/api',
       createProxyMiddleware({
-        target: 'http://localhost:5000',
+        target: 'https://book-review-platform-behq.onrender.com',
         changeOrigin: true,
         secure: false,
         logLevel: 'debug',
@@ -15,7 +15,7 @@ module.exports = function(app) {
           res.writeHead(500, {
             'Content-Type': 'text/plain',
           });
-          res.end('Backend server is not running. Please start the backend server first.');
+          res.end('Unable to reach the deployed backend. Please verify it is up.');
         }
       })
     );

@@ -2,12 +2,14 @@
 const API_CONFIG = {
   // Local development
   development: {
-    baseURL: 'http://localhost:5000/api',
+    // Use CRA proxy by targeting relative /api in development
+    baseURL: '/api',
     timeout: 10000
   },
   // Production (Render deployment)
   production: {
-    baseURL: 'https://book-review-platform-av0h.onrender.com/api',
+    // Point to deployed backend and include /api prefix
+    baseURL: 'https://book-review-platform-behq.onrender.com/api',
     timeout: 15000
   }
 };

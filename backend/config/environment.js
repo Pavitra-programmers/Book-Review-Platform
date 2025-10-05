@@ -8,9 +8,10 @@ const environment = {
     corsOrigin: 'http://localhost:3000'
   },
   production: {
-    apiUrl: 'https://book-review-platform-av0h.onrender.com',
+    apiUrl: 'https://book-review-platform-behq.onrender.com',
     frontendUrl: 'https://your-frontend-domain.com', // Update this when you deploy frontend
-    corsOrigin: 'https://your-frontend-domain.com' // Update this when you deploy frontend
+    // Allow localhost during development and your deployed frontend domain
+    corsOrigin: ['http://localhost:3000', 'https://your-frontend-domain.com']
   }
 };
 
