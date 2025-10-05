@@ -8,7 +8,7 @@ const connectDB = async () => {
     if (!mongoURI || mongoURI.includes('YOUR_ACTUAL_PASSWORD')) {
       console.error('MongoDB URI not properly configured. Please set MONGODB_URI environment variable with your actual password.');
       console.log('For local development, create a .env file with:');
-      console.log('MONGODB_URI=mongodb+srv://kritenshstp021_db_user:YOUR_REAL_PASSWORD@cluster0.oqnxppm.mongodb.net/bookreview?retryWrites=true&w=majority');
+      console.log('MONGODB_URI=url');
       process.exit(1);
     }
     
