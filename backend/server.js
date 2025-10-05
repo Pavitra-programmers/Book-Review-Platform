@@ -11,19 +11,9 @@ connectDB();
 
 const app = express();
 
-// CORS configuration
-const allowedOrigins = Array.isArray(envConfig.corsOrigin)
-  ? envConfig.corsOrigin
-  : [envConfig.corsOrigin];
-
+// CORS configuration (allow localhost dev and your production frontend)
 const corsOptions = {
-  origin: function (origin, callback) {
-    // Allow non-browser requests (no origin) and allowed origins
-    if (!origin || allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
-    return callback(new Error('Not allowed by CORS'));
-  },
+  origin: ['http://localhost:3000', 'https://bookreviewassign.gt.tc'],
   credentials: true,
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -60,8 +50,8 @@ app.use('*', (req, res) => {
 const PORT = envConfig.PORT;
 
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`🌍 Environment: ${envConfig.NODE_ENV}`);
-  console.log(`🔗 API URL: ${envConfig.apiUrl}`);
-  console.log(`🎯 CORS Origin: ${envConfig.corsOrigin}`);
+  console.log(`Server running on port ${PORT}`);
+  console.log(`Environment: ${envConfig.NODE_ENV}`);
+  console.log(`API URL: ${envConfig.apiUrl}`);
+  console.log(`CORS Origin: ${JSON.stringify(corsOptions.origin)}`);
 });

@@ -538,14 +538,14 @@ app.use('*', (req, res) => {
 const PORT = 5000;
 
 app.listen(PORT, () => {
-  console.log(`🚀 Mock server running on port ${PORT}`);
-  console.log(`📚 Book Review API is ready for testing!`);
-  console.log(`🔗 Health check: http://localhost:${PORT}/api/health`);
-  console.log(`📖 Books API: http://localhost:${PORT}/api/books`);
-  console.log(`\n📚 Sample Data Loaded:`);
+  console.log(`Mock server running on port ${PORT}`);
+  console.log(`Book Review API is ready for testing!`);
+  console.log(`Health check: http://localhost:${PORT}/api/health`);
+  console.log(`Books API: http://localhost:${PORT}/api/books`);
+  console.log(`\nSample Data Loaded:`);
   console.log(`   • ${mockBooks.length} books with ratings and reviews`);
   console.log(`   • ${mockReviews.length} sample reviews`);
   console.log(`   • Multiple genres: Fiction, Fantasy, Sci-Fi, Romance, Mystery, etc.`);
-  console.log(`\n💡 This is a mock server for testing without MongoDB.`);
-  console.log(`💡 To use the real database, update the MongoDB connection string.`);
+  console.log(`\nThis is a mock server for testing without MongoDB.`);
+  console.log(`To use the real database, update the MongoDB connection string.`);
 });
