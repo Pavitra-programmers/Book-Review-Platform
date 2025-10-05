@@ -9,9 +9,9 @@ const environment = {
   },
   production: {
     apiUrl: 'https://book-review-platform-behq.onrender.com',
-    frontendUrl: 'https://your-frontend-domain.com', // Update this when you deploy frontend
+    frontendUrl: 'https://bookreviewassign.gt.tc',
     // Allow localhost during development and your deployed frontend domain
-    corsOrigin: ['http://localhost:3000', 'https://your-frontend-domain.com']
+    corsOrigin: ['http://localhost:3000', 'https://bookreviewassign.gt.tc']
   }
 };
 
