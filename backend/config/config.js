@@ -1,5 +1,6 @@
 module.exports = {
-  MONGODB_URI: process.env.MONGODB_URI || 'mongodb+srv://kritenshstp021_db_user:your_actual_password_here@cluster0.oqnxppm.mongodb.net/bookreview?retryWrites=true&w=majority',
-  JWT_SECRET: process.env.JWT_SECRET || 'your_jwt_secret_key_here_make_it_strong_and_secure',
-  PORT: process.env.PORT || 5000
+  MONGODB_URI: process.env.MONGODB_URI || MONGODB_URI,
+  JWT_SECRET: process.env.JWT_SECRET || JWT_SECRET,
+  PORT: process.env.PORT || 5000,
+  NODE_ENV: process.env.NODE_ENV || 'development'
 };

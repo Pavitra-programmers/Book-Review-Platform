@@ -1,10 +1,36 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
+const mongoose = require('mongoose');
 const Review = require('../models/Review');
 const Book = require('../models/Book');
 const auth = require('../middleware/auth');
 
 const router = express.Router();
+
+// Utility function to validate ObjectId
+const validateObjectId = (id, paramName) => {
+  if (!id || id === 'undefined' || id === 'null') {
+    return { 
+      isValid: false, 
+      error: { 
+        message: `Valid ${paramName} is required`,
+        error: `Invalid ${paramName} parameter`
+      }
+    };
+  }
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return { 
+      isValid: false, 
+      error: { 
+        message: `Invalid ${paramName} format`,
+        error: `${paramName} must be a valid MongoDB ObjectId`
+      }
+    };
+  }
+
+  return { isValid: true };
+};
 
 // @route   POST /api/reviews
 // @desc    Add review
@@ -121,12 +147,62 @@ router.delete('/:id', auth, async (req, res) => {
   }
 });
 
+// @route   GET /api/reviews/book/:bookId
+// @desc    Get reviews for a specific book
+// @access  Public
+router.get('/book/:bookId', async (req, res) => {
+  try {
+    const { bookId } = req.params;
+    
+    // Validate bookId parameter
+    const validation = validateObjectId(bookId, 'bookId');
+    if (!validation.isValid) {
+      return res.status(400).json(validation.error);
+    }
+
+    const reviews = await Review.find({ bookId })
+      .populate('bookId', 'title author')
+      .populate('userId', 'name')
+      .sort({ createdAt: -1 });
+
+    res.json({ reviews });
+  } catch (error) {
+    console.error('Get book reviews error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// @route   GET /api/reviews/my-reviews
+// @desc    Get current user's reviews
+// @access  Private
+router.get('/my-reviews', auth, async (req, res) => {
+  try {
+    const reviews = await Review.find({ userId: req.user._id })
+      .populate('bookId', 'title author')
+      .populate('userId', 'name')
+      .sort({ createdAt: -1 });
+
+    res.json({ reviews });
+  } catch (error) {
+    console.error('Get my reviews error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 // @route   GET /api/reviews/user/:userId
 // @desc    Get user's reviews
 // @access  Public
 router.get('/user/:userId', async (req, res) => {
   try {
-    const reviews = await Review.find({ userId: req.params.userId })
+    const { userId } = req.params;
+    
+    // Validate userId parameter
+    const validation = validateObjectId(userId, 'userId');
+    if (!validation.isValid) {
+      return res.status(400).json(validation.error);
+    }
+
+    const reviews = await Review.find({ userId })
       .populate('bookId', 'title author')
       .populate('userId', 'name')
       .sort({ createdAt: -1 });
