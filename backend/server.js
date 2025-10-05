@@ -12,14 +12,27 @@ connectDB();
 const app = express();
 
 // CORS configuration
+const allowedOrigins = Array.isArray(envConfig.corsOrigin)
+  ? envConfig.corsOrigin
+  : [envConfig.corsOrigin];
+
 const corsOptions = {
-  origin: envConfig.corsOrigin,
+  origin: function (origin, callback) {
+    // Allow non-browser requests (no origin) and allowed origins
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error('Not allowed by CORS'));
+  },
   credentials: true,
-  optionsSuccessStatus: 200
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  optionsSuccessStatus: 204
 };
 
 // Middleware
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
