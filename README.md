@@ -6,7 +6,6 @@ A comprehensive MERN stack application where users can sign up, log in, add book
 
 - Frontend: https://bookreviewassign.gt.tc
 - Backend API: https://book-review-platform-behq.onrender.com
-- Health Check: https://book-review-platform-behq.onrender.com/api/health
 
 ## ✨ Features
 
