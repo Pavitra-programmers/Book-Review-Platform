@@ -2,6 +2,12 @@
 
 A comprehensive MERN stack application where users can sign up, log in, add books, and review books. Built with MongoDB, Express, React, and Node.js with JWT authentication.
 
+## 🔗 Live Links
+
+- Frontend: https://bookreviewassign.gt.tc
+- Backend API: https://book-review-platform-behq.onrender.com
+- Health Check: https://book-review-platform-behq.onrender.com/api/health
+
 ## ✨ Features
 
 ### 🔐 Authentication
@@ -119,7 +125,7 @@ npm install
 
 Create a `.env` file in the backend directory:
 ```env
-MONGODB_URI=mongodb+srv://kritenshstp021_db_user:<db_password>@cluster0.oqnxppm.mongodb.net/bookreview?retryWrites=true&w=majority
+MONGODB_URI= Mongodb url
 JWT_SECRET=your_jwt_secret_key_here
 PORT=5000
 ```
